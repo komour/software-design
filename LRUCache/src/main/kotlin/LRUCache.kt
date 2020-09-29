@@ -1,12 +1,12 @@
-import java.lang.Exception
+import java.lang.IllegalArgumentException
 
-class LRUCache<T>(val capacity: Int) {
+class LRUCache<K, V>(private val capacity: Int) {
     init {
         if (capacity < 1) {
-            throw Exception("positive cache capacity required")
+            throw IllegalArgumentException("cache capacity must be greater than 0")
         }
     }
-    private inner class Node(val key: Int, val value: T) {
+    private inner class Node(val key: K, val value: V) {
         var next: Node? = null
         var prev: Node? = null
     }
@@ -14,7 +14,7 @@ class LRUCache<T>(val capacity: Int) {
     private var head: Node? = null
     private var tail: Node? = null
 
-    private val hashMap: HashMap<Int, Node> = HashMap()
+    private val hashMap: HashMap<K, Node> = HashMap()
 
     private fun insertNode(node: Node) {
         node.prev = head
@@ -39,7 +39,7 @@ class LRUCache<T>(val capacity: Int) {
         }
     }
 
-    fun put(key: Int, value: T) {
+    fun put(key: K, value: V) {
         assert(hashMap.size <= capacity)
 
         val initialSize = hashMap.size
@@ -63,9 +63,10 @@ class LRUCache<T>(val capacity: Int) {
         assert(tail != null)
         assert(hashMap.size >= initialSize)
         assert(head!!.key == key)
+        assert(head!!.value == value)
     }
 
-    fun get(key: Int) : T? {
+    fun get(key: K) : V? {
         assert(hashMap.size <= capacity)
 
         val node = hashMap[key] ?: return null
