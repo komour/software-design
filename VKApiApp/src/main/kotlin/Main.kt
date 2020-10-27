@@ -1,3 +1,3 @@
 fun main() {
-    println(TagStatistic(VkApi()).tagHistory("философия", 4).contentToString())
+    println(TagStatistic(ApiRequest()).tagHistory("философия", 4).contentToString())
 }

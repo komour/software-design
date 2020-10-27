@@ -10,7 +10,7 @@ import java.time.temporal.ChronoUnit
 internal class TagStatisticTest {
 
     @MockK
-    private lateinit var api: VkApi
+    private lateinit var api: ApiRequest
 
     private lateinit var stats: TagStatistic
 

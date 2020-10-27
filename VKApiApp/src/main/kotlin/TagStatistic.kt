@@ -2,7 +2,7 @@ import java.time.Duration
 import java.time.Instant
 import java.time.temporal.ChronoUnit
 
-class TagStatistic(private val api: VkApi) {
+class TagStatistic(private val api: ApiRequest) {
 
     fun tagHistory(tag: String, hours: Int): IntArray {
         val time = Instant.now().minus(hours.toLong(), ChronoUnit.HOURS).epochSecond

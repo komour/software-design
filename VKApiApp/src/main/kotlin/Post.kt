@@ -5,9 +5,9 @@ class Post(val id: Int, val date: Long, val text: String) {
 
         other as Post
 
-        if (id != other.id) return false
-        if (date != other.date) return false
-        if (text != other.text) return false
+        if (id != other.id || date != other.date || text != other.text) {
+            return false
+        }
 
         return true
     }
