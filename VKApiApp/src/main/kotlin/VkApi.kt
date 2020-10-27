@@ -1,6 +1,10 @@
 import java.io.File
 import java.net.URLEncoder
 
+private var ACCESS_KEY = File("ACCESS_KEY").inputStream().bufferedReader().use {
+    it.readText()
+}
+
 private const val API_VERSION = "5.124"
 private const val BASE_URL = "https://api.vk.com/method/newsfeed.search"
 
@@ -10,33 +14,9 @@ class VkApi {
         responseFile.writeText(readUrl(buildUrl(query, startTime)))
         return parse(readUrl(buildUrl(query, startTime)))
     }
+
     private fun buildUrl(query: String, startTime: Long): String {
         val q = URLEncoder.encode(query, "utf8")
         return "$BASE_URL?q=$q&start_time=$startTime&count=200&access_token=$ACCESS_KEY&v=$API_VERSION"
     }
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-private const val ACCESS_KEY = "2ba909f72ba909f72ba909f7a72bdd3cf722ba92ba909f774259b56ea457c2692f55a00"
