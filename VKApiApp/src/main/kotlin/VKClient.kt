@@ -8,7 +8,7 @@ private var ACCESS_KEY = File("ACCESS_KEY").inputStream().bufferedReader().use {
 private const val API_VERSION = "5.124"
 private const val BASE_URL = "https://api.vk.com/method/newsfeed.search"
 
-class ApiRequest {
+class VKClient {
     private val parser = PostParser()
     private val urlReader = URLReader()
 
