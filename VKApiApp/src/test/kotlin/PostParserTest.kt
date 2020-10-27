@@ -7,6 +7,7 @@ import kotlin.test.assertFailsWith
 private const val sample = "src/test/resources/sampleResponse.json"
 
 class PostParserTest {
+    private val parser = PostParser()
 
     private val response: String = File(sample).inputStream().bufferedReader().use {
         it.readText()
@@ -14,7 +15,7 @@ class PostParserTest {
 
     @Test
     fun parseSample() {
-        val posts = parse(response)
+        val posts = parser.parse(response)
         assertEquals(posts, listOf(
             Post(97213, 1603774017, "Я ничуть не жалею, что Мой Характер сложный. Он обеспечивает мне сильных людей рядом.\n#soul#philosophy#философия#души#просто"),
             Post(97211, 1603772217, "Если твоя девочка ревнует, плачет, психует значит любит. Береги ее, свою единственную.\n" +
@@ -41,10 +42,10 @@ class PostParserTest {
 
     @Test
     fun parseError() {
-        val posts = parse("{error: \"JHy UHji\"}")
+        val posts = parser.parse("{error: \"JHy UHji\"}")
         assert(posts.isEmpty())
 
-        assertFailsWith(IllegalStateException::class) { parse("TRASH") }
-        assertFailsWith(IllegalStateException::class) { parse("") }
+        assertFailsWith(IllegalStateException::class) { parser.parse("TRASH") }
+        assertFailsWith(IllegalStateException::class) { parser.parse("") }
     }
 }

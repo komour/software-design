@@ -12,7 +12,10 @@ import kotlin.test.assertFailsWith
 
 private const val PORT = 8081
 
-internal class UrlUtilsTest {
+internal class UrlReaderWithStubServerTest {
+
+    private val urlReader = URLReader()
+
 
     @Test
     fun readUrl() {
@@ -21,7 +24,7 @@ internal class UrlUtilsTest {
                 .match(startsWithUri("/ping"))
                 .then(stringContent("pong"))
 
-            val response = readUrl("http://localhost:$PORT/ping")
+            val response = urlReader.readUrl("http://localhost:$PORT/ping")
 
             assertEquals("pong", response)
         }
@@ -35,7 +38,7 @@ internal class UrlUtilsTest {
                     .match(startsWithUri("/ping"))
                     .then(status(HttpStatus.NOT_FOUND_404))
 
-                readUrl("http://localhost:$PORT/ping")
+                urlReader.readUrl("http://localhost:$PORT/ping")
             }
         }
     }
