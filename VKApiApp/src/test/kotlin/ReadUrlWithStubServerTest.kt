@@ -15,27 +15,27 @@ private const val PORT = 8081
 internal class UrlUtilsTest {
 
     @Test
-    fun load() {
+    fun readUrl() {
         withStubServer { server ->
             whenHttp(server)
                 .match(startsWithUri("/ping"))
                 .then(stringContent("pong"))
 
-            val response = load("http://localhost:$PORT/ping")
+            val response = readUrl("http://localhost:$PORT/ping")
 
             assertEquals("pong", response)
         }
     }
 
     @Test
-    fun loadError() {
+    fun readUrlError() {
         assertFailsWith(FileNotFoundException::class) {
             withStubServer { server ->
                 whenHttp(server)
                     .match(startsWithUri("/ping"))
                     .then(status(HttpStatus.NOT_FOUND_404))
 
-                load("http://localhost:$PORT/ping")
+                readUrl("http://localhost:$PORT/ping")
             }
         }
     }

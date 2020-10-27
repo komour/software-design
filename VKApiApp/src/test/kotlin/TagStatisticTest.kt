@@ -7,18 +7,18 @@ import kotlin.test.BeforeTest
 import java.time.Instant
 import java.time.temporal.ChronoUnit
 
-internal class TagStatsTest {
+internal class TagStatisticTest {
 
     @MockK
     private lateinit var api: VkApi
 
-    private lateinit var stats: TagStats
+    private lateinit var stats: TagStatistic
 
     @BeforeTest
     @Throws(Exception::class)
     fun setUp() {
         MockKAnnotations.init(this, relaxUnitFun = true)
-        stats = TagStats(api)
+        stats = TagStatistic(api)
     }
 
     @Test
