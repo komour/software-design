@@ -1,0 +1,53 @@
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<head>
+    <title>Tasks</title>
+</head>
+<body>
+
+<h3>Select task</h3>
+<form method="GET" th:action="'/tasksLists/'+${currentTasksList.getId()}+'/filter-tasks'">
+    <label>
+        <select th:name="filter">
+            <option value="all">all</option>
+            <option value="active">active</option>
+        </select>
+    </label>
+    <input type="submit" value="filter">
+</form>
+
+<table>
+    <th:block th:each="task : ${currentTasks}">
+        <tr>
+            <td><a th:href="'/tasksLists/' + ${currentTasksList.getId()} + '/task/' + ${task.getId()}"
+                   th:text="${task.getName()}"></a></td>
+        </tr>
+    </th:block>
+</table>
+
+<h3>Add new task</h3>
+<form th:object="${task}" method="POST" th:action="'/tasksLists/'+${currentTasksList.getId()}+'/add-task'">
+    <table>
+        <tr>
+            <td><label>Name:</label></td>
+            <td><label>
+                <input type="text" th:field="*{name}"/>
+            </label></td>
+        </tr>
+    </table>
+
+    <input type="submit" value="add">
+</form>
+
+<h3>Delete task list</h3>
+<form method="GET" th:action="'/tasksLists/'+${currentTasksList.getId()}+'/delete'">
+    <input type="submit" value="delete">
+</form>
+
+<h3>Navigation</h3>
+<form method="GET" th:action="'/tasksLists/go-back'">
+    <input type="submit" value="↩ go back to the main page️">
+</form>
+
+</body>
+</html>
