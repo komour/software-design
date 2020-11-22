@@ -47,16 +47,17 @@ class LRUCache<K, V>(private val capacity: Int) {
         val newNode = Node(key, value)
 
         if (!hashMap.containsKey(key)) {
-            insertNode(newNode)
             if (hashMap.size == capacity) {
                 hashMap.remove(tail!!.key)
                 deleteNode(tail!!)
             }
+            insertNode(newNode)
+            hashMap[key] = newNode
         } else {
             deleteNode(hashMap[key]!!)
+            hashMap[key] = newNode
             insertNode(newNode)
         }
-        hashMap[key] = newNode
 
         assert(hashMap.size <= capacity)
         assert(head != null)
