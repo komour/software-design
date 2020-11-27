@@ -11,17 +11,17 @@ public class TaskDao {
     private final AtomicInteger lastTaskId = new AtomicInteger(0);
     private final LinkedHashMap<Integer, Task> tasks = new LinkedHashMap<>();
 
-    public int addTask(int tasksListId, Task task) {
+    public void addTask(int tasksListId, Task task) {
         int id = lastTaskId.incrementAndGet();
         task.setId(id);
         task.setTasksListId(tasksListId);
         task.setActive(true);
         tasks.put(id, task);
-        return id;
     }
 
     public void updateTask(int tasksListId, int taskId, Task task) {
         task.setTasksListId(tasksListId);
+        task.setId(taskId);
         tasks.put(taskId, task);
     }
 

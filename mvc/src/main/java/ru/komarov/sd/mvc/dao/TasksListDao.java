@@ -11,11 +11,11 @@ public class TasksListDao {
     private final LinkedHashMap<Integer, TasksList> tasksLists = new LinkedHashMap<>();
 
 
-    public int addTasksList(TasksList tasksList) {
+    public void addTasksList(TasksList tasksList) {
         int id = lastTasksListId.incrementAndGet();
         tasksList.setId(id);
         this.tasksLists.put(id, tasksList);
-        return id;
+
     }
 
     public TasksList getTasksListById(int id) {

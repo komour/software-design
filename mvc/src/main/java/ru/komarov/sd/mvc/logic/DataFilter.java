@@ -27,8 +27,8 @@ public abstract class DataFilter {
     }
 
     private static class ActiveFilter extends DataFilter {
-        public List<Task> filter(int id, TaskDao productDao) {
-            return productDao.getActiveTasksByTasksListId(id);
+        public List<Task> filter(int id, TaskDao taskDao) {
+            return taskDao.getActiveTasksByTasksListId(id);
         }
     }
 

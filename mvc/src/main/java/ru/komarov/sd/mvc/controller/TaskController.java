@@ -39,10 +39,10 @@ public class TaskController {
         return "task";
     }
 
-    @RequestMapping(value = "/tasksLists/{id}/task/{taskId}", method = RequestMethod.POST)
-    public String updateTask(@PathVariable int id, @PathVariable int taskId, @ModelAttribute("task") Task task) {
-        taskDao.updateTask(id, taskId, task);
-        return "redirect:/tasksLists/{id}/task/{taskId}";
+    @RequestMapping(value = "/tasksLists/{taskListId}/task/{taskId}", method = RequestMethod.POST)
+    public String updateTask(@PathVariable int taskListId, @PathVariable int taskId, @ModelAttribute("task") Task task) {
+        taskDao.updateTask(taskListId, taskId, task);
+        return "redirect:/tasksLists/{taskListId}/task/{taskId}";
     }
 
     @RequestMapping(value = "/tasksLists/{id}/task/{taskId}/delete", method = RequestMethod.GET)
@@ -50,7 +50,6 @@ public class TaskController {
         taskDao.removeTask(taskId);
         return "redirect:/tasksLists/{id}";
     }
-
 
     private void prepareModelMap(ModelMap map, int tasksListId, Task task) {
         map.addAttribute("task", task);

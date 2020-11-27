@@ -52,7 +52,7 @@ public class TasksListController {
     }
 
     @RequestMapping(value = "/tasksLists/{id}/filter-tasks", method = RequestMethod.GET)
-    public String getProducts(@PathVariable int id, @RequestParam String filter, ModelMap map) {
+    public String getTasksLists(@PathVariable int id, @RequestParam String filter, ModelMap map) {
         Optional<DataFilter> dataFilter = DataFilter.getFilterByName(filter);
         dataFilter.ifPresent(value -> prepareModelMap(map, tasksListDao.getTasksListById(id), value.filter(id, taskDao)));
         return "tasksList";
