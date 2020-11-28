@@ -1,6 +1,6 @@
 package ru.komarov.sd.bridge.api;
 
-import ru.komarov.sd.bridge.api.model.Point;
+import ru.komarov.sd.bridge.models.Point;
 
 public interface DrawingApi {
     int getDrawingAreaWidth();

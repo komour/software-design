@@ -1,4 +1,4 @@
-package ru.komarov.sd.bridge.api.model;
+package ru.komarov.sd.bridge.models;
 
 public class Point {
     public int x;

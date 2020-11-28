@@ -1,8 +1,8 @@
 package ru.komarov.sd.bridge.api;
 
-import ru.komarov.sd.bridge.api.model.Circle;
-import ru.komarov.sd.bridge.api.model.Line;
-import ru.komarov.sd.bridge.api.model.Point;
+import ru.komarov.sd.bridge.models.Circle;
+import ru.komarov.sd.bridge.models.Line;
+import ru.komarov.sd.bridge.models.Point;
 
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
@@ -28,20 +28,15 @@ public class AwtDrawingApi extends Frame implements DrawingApi {
     @Override
     public void paint(Graphics g) {
         Graphics2D ga = (Graphics2D) g;
-        for (int i = 0; i < circlesToDraw.size(); ++i) {
-            Circle circle = circlesToDraw.get(i);
+        for (Circle circle : circlesToDraw) {
             Point leftCorner = circle.getRectangleLeftCorner();
             int radius = circle.getRadius();
-            ga.setPaint(Color.GREEN);
-            ga.fill(new Ellipse2D.Double(leftCorner.x, leftCorner.y, radius * 2, radius * 2));
             ga.setPaint(Color.BLACK);
-            ga.drawString(i + 1 + "", leftCorner.x + radius, leftCorner.y + radius);
+            ga.fill(new Ellipse2D.Float(leftCorner.x, leftCorner.y, radius * 2, radius * 2));
         }
         linesToDraw.forEach(line -> {
-            Point p1;
-            Point p2;
-            p1 = line.getP1();
-            p2 = line.getP2();
+            Point p1 = line.getP1();
+            Point p2 = line.getP2();
             ga.drawLine(p1.x, p1.y, p2.x, p2.y);
         });
     }

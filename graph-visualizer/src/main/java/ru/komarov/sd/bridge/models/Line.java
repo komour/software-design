@@ -1,8 +1,8 @@
-package ru.komarov.sd.bridge.api.model;
+package ru.komarov.sd.bridge.models;
 
 public class Line {
-    private Point p1;
-    private Point p2;
+    private final Point p1;
+    private final Point p2;
 
     public Line(Point p1, Point p2) {
         this.p1 = p1;

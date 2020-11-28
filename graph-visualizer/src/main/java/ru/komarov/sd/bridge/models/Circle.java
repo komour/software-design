@@ -1,8 +1,8 @@
-package ru.komarov.sd.bridge.api.model;
+package ru.komarov.sd.bridge.models;
 
 public class Circle {
-    private Point rectangleLeftCorner;
-    private int radius;
+    private final Point rectangleLeftCorner;
+    private final int radius;
 
     public Circle(Point center, int radius) {
         this.rectangleLeftCorner = new Point(center.x - radius, center.y - radius);

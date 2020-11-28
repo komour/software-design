@@ -16,10 +16,9 @@ import java.util.Scanner;
 
 public class Main {
     private static List<Integer>[] g;
-    private static final int DEFAULT_AWT_WIDTH = 600;
-    private static final int DEFAULT_AWT_HEIGHT = 600;
 
     public static void main(String[] args) {
+//        print usage and read data
         System.out.println("Usage: java Drawer <library> <storage_type>");
         System.out.println("library: `awt` or `javafx`");
         System.out.println("storage_type: `edge-list` or `matrix`");
@@ -48,6 +47,7 @@ public class Main {
             }
             Graph graph = storageType.equals("edge-list") ? new EdgeListedGraph(g, api) : new MatrixGraph(g, api);
 
+//            draw graph
             if (library.equals("awt")) {
                 graph.drawGraph();
                 AwtDrawingApi frameApi = (AwtDrawingApi) api;
@@ -58,8 +58,7 @@ public class Main {
                 });
                 frameApi.setSize(frameApi.getDrawingAreaWidth(), frameApi.getDrawingAreaHeight());
                 frameApi.setVisible(true);
-                frameApi.setResizable(false);
-                frameApi.setTitle("Graph visualizer");
+                frameApi.setTitle("AWT Graph visualizer");
             } else {
                 JavaFxDrawingApi.dumpState();
                 graph.drawGraph();
