@@ -15,8 +15,6 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Main {
-    private static List<Integer>[] g;
-
     public static void main(String[] args) {
 //        print usage and read data
         System.out.println("Usage: java Drawer <library> <storage_type>");
@@ -40,10 +38,11 @@ public class Main {
                 System.out.println("Wrong arguments: `edge-list` or `matrix` storage_type expected");
                 return;
             }
+            List<List<Integer>> g;
             if (storageType.equals("edge-list")) {
-                readEdgeListedGraph();
+                g = readEdgeListedGraph();
             } else {
-                readMatrixGraph();
+                g = readMatrixGraph();
             }
             Graph graph = storageType.equals("edge-list") ? new EdgeListedGraph(g, api) : new MatrixGraph(g, api);
 
@@ -67,33 +66,35 @@ public class Main {
         }
     }
 
-    private static void readEdgeListedGraph() {
+    private static List<List<Integer>> readEdgeListedGraph() {
         Scanner in = new Scanner(System.in);
         int n = in.nextInt();
         int m = in.nextInt();
-        g = new ArrayList[n];
+        List<List<Integer>> g = new ArrayList<>(n);
         for (int i = 0; i < n; i++) {
-            g[i] = new ArrayList<>();
+            g.add(new ArrayList<>());
         }
         for (int i = 0; i < m; ++i) {
             int u, v;
             u = in.nextInt();
             v = in.nextInt();
-            g[--u].add(--v);
+            g.get(--u).add(--v);
         }
+        return g;
     }
 
-    private static void readMatrixGraph() {
+    private static List<List<Integer>> readMatrixGraph() {
         Scanner in = new Scanner(System.in);
         int n = in.nextInt();
-        g = new ArrayList[n];
+        List<List<Integer>> g = new ArrayList<>(n);
         for (int i = 0; i < n; ++i) {
-            g[i] = new ArrayList<>();
+            g.add(new ArrayList<>());
         }
         for (int i = 0; i < n; ++i) {
             for (int j = 0; j < n; ++j) {
-                g[i].add(in.nextInt());
+                g.get(i).add(in.nextInt());
             }
         }
+        return g;
     }
 }

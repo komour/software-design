@@ -5,7 +5,7 @@ import ru.komarov.sd.bridge.api.DrawingApi;
 import java.util.List;
 
 public class EdgeListedGraph extends AbstractGraph {
-    public EdgeListedGraph(List<Integer>[] graph, DrawingApi drawingApi) {
+    public EdgeListedGraph(List<List<Integer>> graph, DrawingApi drawingApi) {
         super(graph, drawingApi);
 
     }
@@ -13,8 +13,8 @@ public class EdgeListedGraph extends AbstractGraph {
     @Override
     public void drawGraph() {
         super.drawGraph();
-        for (int i = 0; i < vertexesIds.length; ++i) {
-            for (Integer vert : vertexesIds[i]) {
+        for (int i = 0; i < graph.size(); i++) {
+            for (Integer vert : graph.get(i)) {
                 drawingApi.drawLine(vertexCentersById.get(i), vertexCentersById.get(vert));
             }
         }

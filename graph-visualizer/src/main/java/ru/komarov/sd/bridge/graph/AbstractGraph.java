@@ -13,18 +13,18 @@ public abstract class AbstractGraph extends Graph {
     private static final int VERTEX_RADIUS = 5;
     private static final double SPACE_K = 0.9;
 
-    protected List<Integer>[] vertexesIds;
+    protected List<List<Integer>> graph;
     protected Point drawingAreaCenter;
     protected Map<Integer, Point> vertexCentersById = new HashMap<>();
 
-    public AbstractGraph(List<Integer>[] vertexesIds, DrawingApi drawingApi) {
+    public AbstractGraph(List<List<Integer>> graph, DrawingApi drawingApi) {
         super(drawingApi);
-        this.vertexesIds = vertexesIds;
+        this.graph = graph;
         drawingAreaCenter = new Point(drawingApi.getDrawingAreaWidth() / 2, drawingApi.getDrawingAreaHeight() / 2);
     }
 
     protected double getOneVertexArcAngle() {
-        return CIRCLE_ANGLE / (double) this.vertexesIds.length;
+        return CIRCLE_ANGLE / (double) this.graph.size();
     }
 
     protected int getPlaceDistance() {
@@ -37,7 +37,7 @@ public abstract class AbstractGraph extends Graph {
         double angleStep = getOneVertexArcAngle();
         int placeDistance = getPlaceDistance();
         double curAngle = 0;
-        for (int i = 0; i < vertexesIds.length; i++, curAngle += angleStep) {
+        for (int i = 0; i < graph.size(); i++, curAngle += angleStep) {
             int x = (int) (drawingAreaCenter.x + placeDistance * Math.cos(curAngle * ANGLE_TO_RADIAN_K));
             int y = (int) (drawingAreaCenter.y - placeDistance * Math.sin(curAngle * ANGLE_TO_RADIAN_K));
             Point vertexCenter = new Point(x, y);
