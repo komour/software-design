@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
+import static java.util.function.Predicate.not;
+
 public class TaskDao {
     private final AtomicInteger lastTaskId = new AtomicInteger(0);
     private final LinkedHashMap<Integer, Task> tasks = new LinkedHashMap<>();
@@ -43,5 +45,9 @@ public class TaskDao {
 
     public List<Task> getActiveTasksByTasksListId(int tasksListId) {
         return getTasksByTasksListId(tasksListId).stream().filter(Task::isActive).collect(Collectors.toList());
+    }
+
+    public List<Task> getInactiveTasksByTasksListId(int tasksListId) {
+        return getTasksByTasksListId(tasksListId).stream().filter(not(Task::isActive)).collect(Collectors.toList());
     }
 }

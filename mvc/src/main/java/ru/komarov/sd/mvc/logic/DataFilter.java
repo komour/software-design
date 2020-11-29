@@ -15,6 +15,7 @@ public abstract class DataFilter {
         HashMap<String, DataFilter> filters = new HashMap<>();
         filters.put("all", new AllFilter());
         filters.put("active", new ActiveFilter());
+        filters.put("inactive", new InactiveFilter());
         return filters;
     }
 
@@ -29,6 +30,12 @@ public abstract class DataFilter {
     private static class ActiveFilter extends DataFilter {
         public List<Task> filter(int id, TaskDao taskDao) {
             return taskDao.getActiveTasksByTasksListId(id);
+        }
+    }
+
+    private static class InactiveFilter extends  DataFilter {
+        public  List<Task> filter(int id, TaskDao taskDao) {
+            return taskDao.getInactiveTasksByTasksListId(id);
         }
     }
 
