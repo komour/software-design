@@ -4,7 +4,7 @@ import ru.komarov.sd.bridge.api.DrawingApi;
 
 import java.util.List;
 
-public class EdgeListedGraph extends AbstractGraph {
+public class EdgeListedGraph extends Graph {
     public EdgeListedGraph(List<List<Integer>> graph, DrawingApi drawingApi) {
         super(graph, drawingApi);
 

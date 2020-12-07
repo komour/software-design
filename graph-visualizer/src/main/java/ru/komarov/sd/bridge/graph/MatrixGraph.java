@@ -4,7 +4,7 @@ import ru.komarov.sd.bridge.api.DrawingApi;
 
 import java.util.List;
 
-public class MatrixGraph extends AbstractGraph {
+public class MatrixGraph extends Graph {
     public MatrixGraph(List<List<Integer>> graph, DrawingApi drawingApi) {
         super(graph, drawingApi);
     }

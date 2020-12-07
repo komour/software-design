@@ -4,8 +4,8 @@ import javafx.application.Application;
 import ru.komarov.sd.bridge.api.AwtDrawingApi;
 import ru.komarov.sd.bridge.api.DrawingApi;
 import ru.komarov.sd.bridge.api.JavaFxDrawingApi;
-import ru.komarov.sd.bridge.graph.EdgeListedGraph;
 import ru.komarov.sd.bridge.graph.Graph;
+import ru.komarov.sd.bridge.graph.EdgeListedGraph;
 import ru.komarov.sd.bridge.graph.MatrixGraph;
 
 import java.awt.event.WindowAdapter;
