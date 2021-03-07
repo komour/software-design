@@ -28,7 +28,7 @@ class SearchActorTest {
             val system = ActorSystem.create("ActorSystem")
             val actors = listOf(
                 system.actorOf(
-                    Props.create(SearchActor::class.java, "http://localhost:$PORT/", "ol li h3 a", false),
+                    Props.create(SearchActor::class.java, "http://localhost:$PORT/", "ol li h3 a"),
                     "test"
                 )
             )
@@ -60,7 +60,7 @@ class SearchActorTest {
             val system = ActorSystem.create("ActorSystem")
             val actors = listOf(
                 system.actorOf(
-                    Props.create(SearchActor::class.java, "http://localhost:$PORT/", "ol li h3 a", false),
+                    Props.create(SearchActor::class.java, "http://localhost:$PORT/", "ol li h3 a"),
                     "test"
                 )
             )
