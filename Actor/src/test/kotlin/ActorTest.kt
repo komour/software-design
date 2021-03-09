@@ -19,7 +19,8 @@ class SearchActorTest {
     private val response = File("test_YaHoo.html").bufferedReader().readText()
 
     @Test
-    fun ok() {
+    fun okTest() {
+        var answerHashMap: HashMap<String, List<String>>? = null
         withStubServer { server ->
             whenHttp(server)
                 .match(alwaysTrue())
@@ -38,20 +39,23 @@ class SearchActorTest {
                         MasterActor::class.java,
                         actors,
                         { answerMap: HashMap<String, List<String>> ->
-                            assertEquals(1, answerMap.size)
-                            assertEquals(
-                                "How Old Am I? Exact Age Calculator https://www.calculators.org/health/age.php",
-                                answerMap["test"]!![1]
-                            )
+                            answerHashMap = answerMap
                         }), "master"
                 )
             master.tell("test", null)
             Await.result(system.whenTerminated(), Duration.Inf())
         }
+        assertNotNull(answerHashMap)
+        assertEquals(1, answerHashMap!!.size)
+        assertEquals(
+            "How Old Am I? Exact Age Calculator https://www.calculators.org/health/age.php",
+            answerHashMap!!["test"]!![1]
+        )
     }
 
     @Test
-    fun timeout() {
+    fun timeoutTest() {
+        var answerHashMap: HashMap<String, List<String>>? = null
         withStubServer { server ->
             whenHttp(server)
                 .match(alwaysTrue())
@@ -68,12 +72,18 @@ class SearchActorTest {
                 MasterActor::class.java,
                 actors,
                 { answerMap: HashMap<String, List<String>> ->
-                    assertEquals(0, answerMap.size)
+                    answerHashMap = answerMap
                 }
             ), "master")
             master.tell("test", null)
             Await.result(system.whenTerminated(), Duration.Inf())
         }
+        assertNotNull(answerHashMap)
+        assertEquals(1, answerHashMap!!.size)
+        assertEquals(
+            "TIMEOUT!\n",
+            answerHashMap!!["deadLetters"]!![0]
+        )
     }
 
     private fun withStubServer(callback: (StubServer) -> Unit) {
