@@ -8,11 +8,9 @@
         <version>2.4.0</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.utusikov</groupId>
-    <artifactId>hw3</artifactId>
+    <groupId>ru.ifmo.komarov</groupId>
+    <artifactId>sd3</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>hw3</name>
-    <description>Ppo homework</description>
 
     <properties>
         <java.version>14</java.version>
